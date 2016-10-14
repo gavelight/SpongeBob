@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using FinalProject.Models
+@using System.Security.Claims
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var identity = (ClaimsIdentity)User.Identity;
+    var name = (identity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName))?.Value;
+
+    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">שלום @name!</a>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link">התנתק</button>
+                <span class="glyphicon glyphicon-log-out"></span>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a asp-area="" asp-controller="Account" asp-action="Register"> <span class="glyphicon glyphicon-user"></span> הירשם</a>            
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Account" asp-action="Login"> <span class="glyphicon glyphicon-log-in"></span> התחבר</a>
+            <span class="glyphicon glyphicon-log-in"></span>
+        </li>
+    </ul>
+}

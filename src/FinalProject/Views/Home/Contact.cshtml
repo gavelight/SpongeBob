@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "צור קשר";
+}
+
+<!-- *****************************************************************************************************************
+     BLUE WRAP
+     ***************************************************************************************************************** -->
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>צור קשר.</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+<!-- *****************************************************************************************************************
+ CONTACT WRAP
+ ***************************************************************************************************************** -->
+<div id="contactwrap"></div>
+
+<!-- *****************************************************************************************************************
+ CONTACT FORMS
+ ***************************************************************************************************************** -->
+<div class="container mtb">
+    <div class="row">
+        <div class="col-lg-8">
+            <h4>צרו איתנו קשר בפשטות!</h4>
+            <div class="hline"></div>
+            <p>אנו מוכנים לשמוע כל הצעת שיפור או תלונה על השירות באתר ולטפל בכם מכל הלב</p>
+            <form method="post" role="form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">השם שלך</label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">כתובת מייל</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="subject">נושא</label>
+                    <input type="text" class="form-control" id="subject">
+                </div>
+                <div class="form-group">
+                    <label for="message">הודעה</label>
+                    <textarea class="form-control" id="message" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-theme">שלח</button>
+            </form>
+
+            @section scripts
+            {
+                <script>
+                    $('#contactForm').submit(function () {
+                        $.post('',{ name: $('#message').val() }).done(function (response) {
+
+                            })
+                    });
+                </script>
+
+                @*<script>
+                    $('#contactForm').submit(function () {
+                        $.post('',
+                            {
+                                name: $('#message').val,
+                                email: $('#email').val,
+                                subject: $('#subject').val,
+                                message: $('#message').val
+                            }).done(function (response) {
+
+                            })
+                    });
+                </script>*@
+            }
+            
+
+        </div><! --/col-lg-8 -->
+
+        <div class="col-lg-4">
+            <h4>הכתובת שלנו</h4>
+            <div class="hline"></div>
+            <p>
+                אלי ויזל, 2<br />
+                ראשון לציון<br />
+                ישראל<br />
+            </p>
+            <p>
+                מייל: pizza_planet@gmail.com<br />
+                טלפון: 777-777-777
+            </p>
+        </div>
+    </div><! --/row -->
+</div><! --/container -->
