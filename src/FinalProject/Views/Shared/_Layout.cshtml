@@ -36,6 +36,10 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">בית</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">אודות</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">צור קשר</a></li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-area="" asp-controller="Contact" asp-action="Index">פניות</a></li>
+                    }
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
