@@ -1,4 +1,6 @@
-﻿@{
+﻿@model FinalProject.Models.Contact
+
+@{
     ViewData["Title"] = "צור קשר";
 }
 
@@ -22,56 +24,34 @@
  ***************************************************************************************************************** -->
 <div class="container mtb">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8" id="formSection">            
             <h4>צרו איתנו קשר בפשטות!</h4>
             <div class="hline"></div>
             <p>אנו מוכנים לשמוע כל הצעת שיפור או תלונה על השירות באתר ולטפל בכם מכל הלב</p>
+            <div class="loader" id="progress" style="display:none"> </div>
             <form method="post" role="form" id="contactForm">
                 <div class="form-group">
-                    <label for="name">השם שלך</label>
-                    <input type="text" class="form-control" id="name">
+                    <label for="Name">השם שלך</label>
+                    <input asp-for="Name" class="form-control" id="Name">
+                    <span asp-validation-for="Name" class="text-danger" />
                 </div>
                 <div class="form-group">
-                    <label for="email">כתובת מייל</label>
-                    <input type="email" class="form-control" id="email">
+                    <label for="Email">כתובת מייל</label>
+                    <input asp-for="Email" class="form-control" id="Email">
+                    <span asp-validation-for="Email" class="text-danger" />
                 </div>
                 <div class="form-group">
-                    <label for="subject">נושא</label>
-                    <input type="text" class="form-control" id="subject">
+                    <label for="Subject">נושא</label>
+                    <input asp-for="Subject" class="form-control" id="Subject">
+                    <span asp-validation-for="Subject" class="text-danger" />
                 </div>
                 <div class="form-group">
-                    <label for="message">הודעה</label>
-                    <textarea class="form-control" id="message" rows="3"></textarea>
+                    <label for="Message">הודעה</label>
+                    <input asp-for="Message" class="form-control" id="Message">
+                    <span asp-validation-for="Message" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-theme">שלח</button>
             </form>
-
-            @section scripts
-            {
-                <script>
-                    $('#contactForm').submit(function () {
-                        $.post('',{ name: $('#message').val() }).done(function (response) {
-
-                            })
-                    });
-                </script>
-
-                @*<script>
-                    $('#contactForm').submit(function () {
-                        $.post('',
-                            {
-                                name: $('#message').val,
-                                email: $('#email').val,
-                                subject: $('#subject').val,
-                                message: $('#message').val
-                            }).done(function (response) {
-
-                            })
-                    });
-                </script>*@
-            }
-            
-
         </div><! --/col-lg-8 -->
 
         <div class="col-lg-4">
@@ -89,3 +69,34 @@
         </div>
     </div><! --/row -->
 </div><! --/container -->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('#contactForm').submit(function (e) {
+
+            // Prevent default submit button behavior
+            e.preventDefault();
+
+            // Display loading animation
+            $('#progress').show();
+
+            $('#contactForm').hide();
+
+            $.ajax({
+                url: '/Contact/Create',
+                type: 'POST',
+                async: true,
+                data: {
+                    name: $('#Name').val(),
+                    email: $('#Email').val(),
+                    subject: $('#Subject').val(),
+                    message: $('#Message').val() },
+                complete: function (response) {
+                    setTimeout(function () { $('#formSection').html(response.responseText) }, 2000);
+                }
+            });
+        });
+    </script>
+}

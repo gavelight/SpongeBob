@@ -24,5 +24,7 @@ namespace FinalProject.Data
         }
 
         public DbSet<Branch> Branch { get; set; }
+
+        public DbSet<Contact> Contact { get; set; }
     }
 }

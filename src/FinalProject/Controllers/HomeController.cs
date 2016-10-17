@@ -21,13 +21,7 @@ namespace FinalProject.Controllers
 
         public IActionResult Contact()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Contact(string name, string email, string subject, string message)
-        {
-            return View();
+            return RedirectToAction("Create", "Contact");
         }
 
         public IActionResult Error()

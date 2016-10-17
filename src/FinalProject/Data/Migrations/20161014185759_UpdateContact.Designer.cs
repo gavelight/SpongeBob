@@ -8,9 +8,10 @@ using FinalProject.Data;
 namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161014185759_UpdateContact")]
+    partial class UpdateContact
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -89,36 +90,6 @@ namespace FinalProject.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Contact");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.Branch", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("City")
-                        .IsRequired();
-
-                    b.Property<DateTime>("FoundationDate");
-
-                    b.Property<bool>("IsDisabledAccess");
-
-                    b.Property<bool>("IsEventsAllowed");
-
-                    b.Property<bool>("IsKosher");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired();
-
-                    b.Property<string>("Region")
-                        .IsRequired();
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Branch");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
