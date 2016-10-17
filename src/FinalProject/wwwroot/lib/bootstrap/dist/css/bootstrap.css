@@ -1454,7 +1454,7 @@ dd {
 }
 @media (min-width: 768px) {
   .dl-horizontal dt {
-    float: left;
+    float: right;
     width: 160px;
     overflow: hidden;
     clear: left;
@@ -2259,7 +2259,7 @@ caption {
   text-align: left;
 }
 th {
-  text-align: left;
+  text-align: right;
 }
 .table {
   width: 100%;
@@ -2647,6 +2647,7 @@ input[type="search"] {
   margin-bottom: 0;
   font-weight: normal;
   cursor: pointer;
+  margin-right: 30px;
 }
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
@@ -2985,6 +2986,7 @@ select[multiple].input-lg {
     padding-top: 7px;
     margin-bottom: 0;
     text-align: right;
+    float: right;
   }
 }
 .form-horizontal .has-feedback .form-control-feedback {

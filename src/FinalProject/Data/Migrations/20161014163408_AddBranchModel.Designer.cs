@@ -8,9 +8,10 @@ using FinalProject.Data;
 namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161014163408_AddBranchModel")]
+    partial class AddBranchModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -74,8 +75,7 @@ namespace FinalProject.Data.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("City")
-                        .IsRequired();
+                    b.Property<string>("City");
 
                     b.Property<DateTime>("FoundationDate");
 
@@ -85,14 +85,9 @@ namespace FinalProject.Data.Migrations
 
                     b.Property<bool>("IsKosher");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired();
-
-                    b.Property<string>("Region")
-                        .IsRequired();
+                    b.Property<string>("Region");
 
                     b.HasKey("ID");
 

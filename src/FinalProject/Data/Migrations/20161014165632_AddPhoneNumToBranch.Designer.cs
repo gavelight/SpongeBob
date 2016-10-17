@@ -8,9 +8,10 @@ using FinalProject.Data;
 namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161014165632_AddPhoneNumToBranch")]
+    partial class AddPhoneNumToBranch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -88,8 +89,7 @@ namespace FinalProject.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired();
+                    b.Property<string>("PhoneNumber");
 
                     b.Property<string>("Region")
                         .IsRequired();
