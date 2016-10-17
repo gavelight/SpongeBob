@@ -147,5 +147,10 @@ namespace FinalProject.Controllers
         {
             return _context.Branch.Any(e => e.ID == id);
         }
+
+        public IActionResult Map()
+        {
+            return View();
+        }
     }
 }
