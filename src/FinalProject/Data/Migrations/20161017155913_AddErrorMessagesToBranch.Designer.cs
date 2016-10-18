@@ -8,9 +8,10 @@ using FinalProject.Data;
 namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161017155913_AddErrorMessagesToBranch")]
+    partial class AddErrorMessagesToBranch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -67,28 +68,6 @@ namespace FinalProject.Data.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.Contact", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email")
-                        .IsRequired();
-
-                    b.Property<string>("Message")
-                        .IsRequired();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("Subject")
-                        .IsRequired();
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Contact");
                 });
 
             modelBuilder.Entity("FinalProject.Models.Branch", b =>

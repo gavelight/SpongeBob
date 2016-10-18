@@ -23,6 +23,8 @@ namespace FinalProject.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
+        public DbSet<Branch> Branch { get; set; }
+
         public DbSet<Contact> Contact { get; set; }
     }
 }
