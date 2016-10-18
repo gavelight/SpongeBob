@@ -29,25 +29,25 @@
             <div class="hline"></div>
             <p>אנו מוכנים לשמוע כל הצעת שיפור או תלונה על השירות באתר ולטפל בכם מכל הלב</p>
             <div class="loader" id="progress" style="display:none"> </div>
-            <form method="post" role="form" id="contactForm">
+            <form method="post" role="form" id="contactForm">                
                 <div class="form-group">
                     <label for="Name">השם שלך</label>
-                    <input asp-for="Name" class="form-control" id="Name">
+                    <input asp-for="Name" class="form-control" id="Name"/>
                     <span asp-validation-for="Name" class="text-danger" />
                 </div>
                 <div class="form-group">
                     <label for="Email">כתובת מייל</label>
-                    <input asp-for="Email" class="form-control" id="Email">
+                    <input asp-for="Email" class="form-control" id="Email"/>
                     <span asp-validation-for="Email" class="text-danger" />
                 </div>
                 <div class="form-group">
                     <label for="Subject">נושא</label>
-                    <input asp-for="Subject" class="form-control" id="Subject">
+                    <input asp-for="Subject" class="form-control" id="Subject"/>
                     <span asp-validation-for="Subject" class="text-danger" />
                 </div>
                 <div class="form-group">
                     <label for="Message">הודעה</label>
-                    <input asp-for="Message" class="form-control" id="Message">
+                    @Html.EditorFor( model => model.Message, new { htmlAttributes = new { @id = "Message", @class = "form-control", rows = "3"} })
                     <span asp-validation-for="Message" class="text-danger" />
                 </div>
                 <button type="submit" class="btn btn-theme">שלח</button>
@@ -74,10 +74,18 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
+        
         $('#contactForm').submit(function (e) {
-
+            
             // Prevent default submit button behavior
             e.preventDefault();
+
+            // Validate the form first
+            var isValid = $('#contactForm').validate().form();
+
+            if (!isValid) {
+                return false;
+            }
 
             // Display loading animation
             $('#progress').show();
