@@ -2,88 +2,81 @@
 
 @{
     ViewData["Title"] = "הסניפים שלנו";
+    ViewData["BlueTitle"] = "הסניפים שלנו.";
 }
 
-<!-- *****************************************************************************************************************
- BLUE WRAP
- ***************************************************************************************************************** -->
-<div id="blue">
-    <div class="container">
-        <div class="row">
-            <h3>הסניפים שלנו</h3>
-        </div><!-- /row -->
-    </div> <!-- /container -->
-</div><!-- /blue -->
-
-<p>
-    <a asp-action="Create">יצירת סניף חדש</a>
-</p>
-<p>
-    <a asp-action="Map">צפייה בסניפים על גבי מפה</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Region)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FoundationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsDisabledAccess)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsKosher)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsEventsAllowed)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Region)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FoundationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDisabledAccess)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsKosher)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsEventsAllowed)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">עריכה</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">פרטים</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">מחיקה</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container mtb">
+    <p>
+        <a asp-action="Create">יצירת סניף חדש</a>
+    </p>
+    <p>
+        <a asp-action="Map">צפייה בסניפים על גבי מפה</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Region)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FoundationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsDisabledAccess)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsKosher)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsEventsAllowed)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Region)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoundationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsDisabledAccess)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsKosher)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsEventsAllowed)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID">עריכה</a> |
+                        <a asp-action="Details" asp-route-id="@item.ID">פרטים</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">מחיקה</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
