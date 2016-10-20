@@ -2,77 +2,70 @@
 
 @{
     ViewData["Title"] = "מחיקת סניף";
+    string blueTitle = "מחיקת סניף: " + Model.Name + ".";
+    ViewData["BlueTitle"] = blueTitle;
 }
 
-<!-- *****************************************************************************************************************
- BLUE WRAP
- ***************************************************************************************************************** -->
-<div id="blue">
-    <div class="container">
-        <div class="row">
-            <h3>מחיקת סניף: @Model.Name</h3>
-        </div><!-- /row -->
-    </div> <!-- /container -->
-</div><!-- /blue -->
+<div class="container mtb">
+    <h3>האם אתה בטוח שברצונך למחוק סניף זה?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Region)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Region)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.City)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FoundationDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FoundationDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsDisabledAccess)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsDisabledAccess)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsKosher)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsKosher)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsEventsAllowed)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsEventsAllowed)
+            </dd>
+        </dl>
 
-<h3>האם אתה בטוח שברצונך למחוק את סניף זה?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Region)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Region)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FoundationDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FoundationDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDisabledAccess)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsDisabledAccess)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsKosher)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsKosher)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsEventsAllowed)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsEventsAllowed)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <div class="form-actions no-color">
-            <input type="submit" value="מחק" class="btn btn-default" /> |
-            <a asp-action="Index">חזרה לרשימה</a>
-        </div>
-    </form>
+        <form asp-action="Delete">
+            <div class="form-actions no-color">
+                <input type="submit" value="מחק" class="btn btn-default" /> |
+                <a asp-action="Index">חזרה לרשימה</a>
+            </div>
+        </form>
+    </div>
 </div>

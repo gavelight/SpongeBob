@@ -76,31 +76,20 @@ namespace FinalProject.Controllers
             return Content(Response);
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                var contact = await _context.Contact.SingleOrDefaultAsync(m => m.ID == id);
+                _context.Contact.Remove(contact);
+                await _context.SaveChangesAsync();
+                return Content(Boolean.TrueString);
             }
-
-            var contact = await _context.Contact.SingleOrDefaultAsync(m => m.ID == id);
-            if (contact == null)
+            catch
             {
-                return NotFound();
+                return Content(Boolean.FalseString);
             }
-
-            return View(contact);
-        }
-
-        // POST: Contacts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var contact = await _context.Contact.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Contact.Remove(contact);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
         }
 
         private bool ContactExists(int id)

@@ -408,7 +408,7 @@ csmall2 {
     text-align: center;
     background-attachment: relative;
     background-position: center center;
-    min-height: 250px;
+    min-height: 225px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -481,4 +481,20 @@ csmall2 {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+#tableHr {
+    text-align: right;
+}
+
+dt.first{
+    margin-top: 0px;
+}
+
+dt{
+    margin-top: 10px;
+}
+
+#messageDiv{
+    white-space:pre-wrap;
 }
