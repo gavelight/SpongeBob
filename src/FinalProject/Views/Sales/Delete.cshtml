@@ -1,0 +1,46 @@
+﻿@model FinalProject.Models.Sale
+
+@{
+    ViewData["Title"] = "מחיקת רכישה";
+}
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>עריכת רכישה</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+<div class="container mtb">
+    <h3>האם אתה בטוח שברצונך למחוק רכישה זו?</h3>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Bran.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Bran.Name)
+            </dd>
+            <dt>
+                שם המוצר
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prod.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Amount)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Amount)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <div class="form-actions no-color">
+                <input type="submit" value="מחיקה" class="btn btn-default" /> |
+                <a asp-action="Index">חזרה לרשימה</a>
+            </div>
+        </form>
+    </div>
+</div>

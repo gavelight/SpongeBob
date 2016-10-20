@@ -1,0 +1,42 @@
+﻿@model FinalProject.Models.Sale
+
+@{
+    ViewData["Title"] = "פרטי רכישה";
+}
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>פרטי רכישה</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+<div class="container mtb">
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                שם הסניף
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Bran.Name)
+            </dd>
+            <dt>
+                שם המוצר
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prod.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Amount)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Amount)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ID">עריכת רכישה</a> |
+        <a asp-action="Index">בחזרה לרשימה</a>
+    </div>
+</div>
