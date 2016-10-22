@@ -2,15 +2,9 @@
 
 @{
     ViewData["Title"] = "עריכת מוצר";
+    string blueTitle = "עריכת מוצר: " + Model.Name + ".";
+    ViewData["BlueTitle"] = blueTitle;
 }
-
-<div id="blue">
-    <div class="container">
-        <div class="row">
-            <h3>עריכת מוצר: @Model.Name</h3>
-        </div><!-- /row -->
-    </div> <!-- /container -->
-</div><!-- /blue -->
 
 <div class="container mtb">
     <form asp-action="Edit">

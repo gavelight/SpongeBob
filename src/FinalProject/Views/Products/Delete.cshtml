@@ -2,15 +2,9 @@
 
 @{
     ViewData["Title"] = "מחיקת מוצר";
+    string blueTitle = "מחיקת מוצר: " + Model.Name + ".";
+    ViewData["BlueTitle"] = blueTitle;
 }
-
-<div id="blue">
-    <div class="container">
-        <div class="row">
-            <h3>מחיקת מוצר : @Model.Name</h3>
-        </div><!-- /row -->
-    </div> <!-- /container -->
-</div><!-- /blue -->
 
 <div class="container mtb">
     <h3>האם אתה בטוח שברצונך למחוק מוצר זה?</h3>

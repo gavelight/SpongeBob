@@ -16,13 +16,13 @@ body {
 	margin: 0; 
 	height: 100%; 
 	color: #384452;
-	font-family: 'Lato', sans-serif;
+	font-family: sans-serif;
 	font-weight: 400;
     margin-bottom: 200px;
 	}
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Raleway', sans-serif;
+	font-family: sans-serif;
 	font-weight: 700;
 }
 
@@ -34,7 +34,7 @@ h1, h2, h3, h4, h5, h6 {
 p { 
 	padding: 0; 
 	margin-bottom: 12px; 
-	font-family: 'Lato', sans-serif;
+	font-family: sans-serif;
 	font-weight: 400;
 	font-size: 14px; 
 	line-height: 24px;
@@ -276,7 +276,7 @@ csmall2 {
     text-align: center;
     background-attachment: relative;
     background-position: center center;
-    min-height: 225px;
+    min-height: 190px;
     width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
