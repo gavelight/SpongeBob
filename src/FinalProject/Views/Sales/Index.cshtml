@@ -1,0 +1,56 @@
+﻿@model IEnumerable<FinalProject.Models.Sale>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>הסניפים שלנו</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+<div class="container mtb">
+    <p>
+        <a asp-action="Create">צור רכישה חדשה</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                   שם הסניף
+                </th>
+                <th>
+                    שם המוצר
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bran.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Prod.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID">עריכה</a> |
+                        <a asp-action="Details" asp-route-id="@item.ID">פרטים</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">מחיקה</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>

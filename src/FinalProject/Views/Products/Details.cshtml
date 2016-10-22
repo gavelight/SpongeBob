@@ -1,0 +1,54 @@
+﻿@model FinalProject.Models.Product
+
+@{
+    ViewData["Title"] = "פרטי מוצר";
+}
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>פרטי מוצר: @Model.Name</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+<div class="container mtb">
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsVegeterian)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsVegeterian)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsVegan)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsVegan)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ID">עריכת מוצר</a> |
+        <a asp-action="Index">חזרה לרשימה</a>
+    </div>
+</div>

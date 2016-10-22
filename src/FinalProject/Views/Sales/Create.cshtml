@@ -1,0 +1,53 @@
+﻿@model FinalProject.Models.Sale
+
+@{
+    ViewData["Title"] = "מכירה חדשה";
+}
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>עריכת רכישה</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+<div class="container mtb">
+    <form asp-action="Create">
+        <div class="form-horizontal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BranchID" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="BranchID" class="form-control" asp-items="ViewBag.BranchID"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductID" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="ProductID" class="form-control" asp-items="ViewBag.ProductID"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Amount" class="form-control" />
+                    <span asp-validation-for="Amount" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="יצירה" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <a asp-action="Index">חזרה לרשימה</a>
+    </div>
+</div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

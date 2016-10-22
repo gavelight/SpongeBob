@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FinalProject.Models
@@ -38,5 +39,8 @@ namespace FinalProject.Models
 
         [Display(Name = "האם ניתן לקיים אירועים?")]
         public bool IsEventsAllowed { get; set; }
+
+        public virtual ICollection<Sale> Sales { get; set; }
+
     }
 }

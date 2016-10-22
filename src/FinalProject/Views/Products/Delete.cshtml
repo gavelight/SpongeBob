@@ -1,0 +1,58 @@
+﻿@model FinalProject.Models.Product
+
+@{
+    ViewData["Title"] = "מחיקת מוצר";
+}
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>מחיקת מוצר : @Model.Name</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+<div class="container mtb">
+    <h3>האם אתה בטוח שברצונך למחוק מוצר זה?</h3>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsVegeterian)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsVegeterian)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsVegan)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsVegan)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <div class="form-actions no-color">
+                <input type="submit" value="מחיקה" class="btn btn-default" /> |
+                <a asp-action="Index">חזרה לרשימה</a>
+            </div>
+        </form>
+    </div>
+</div>

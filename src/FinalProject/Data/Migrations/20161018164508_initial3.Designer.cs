@@ -8,9 +8,10 @@ using FinalProject.Data;
 namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161018164508_initial3")]
+    partial class initial3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -127,41 +128,21 @@ namespace FinalProject.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 20);
 
                     b.Property<bool>("IsVegan");
 
                     b.Property<bool>("IsVegeterian");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasAnnotation("MaxLength", 20);
+                        .IsRequired();
 
                     b.Property<float>("Price");
 
                     b.HasKey("ID");
 
                     b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.Sale", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Amount");
-
-                    b.Property<int>("BranchID");
-
-                    b.Property<int>("ProductID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("BranchID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("Sale");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -269,19 +250,6 @@ namespace FinalProject.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.Sale", b =>
-                {
-                    b.HasOne("FinalProject.Models.Branch", "Bran")
-                        .WithMany("Sales")
-                        .HasForeignKey("BranchID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("FinalProject.Models.Product", "Prod")
-                        .WithMany("Sales")
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
