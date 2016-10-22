@@ -445,13 +445,22 @@ namespace FinalProject.Controllers
         {
             foreach (var error in result.Errors)
             {
+                // Translate error message to hebrew
                 if(error.Description.Contains("alphanumeric"))
                 {
                     error.Description = "הסיסמא חייבת להכיל לפחות סימן אחד.";
                 }
                 else if(error.Description.Contains("taken"))
                 {
-                    error.Description = "כתובת המייל שהוזנה כבר נתפסה, אנא הזן כתובת מייל אחרת";
+                    error.Description = "כתובת המייל שהוזנה כבר נתפסה, אנא הזן כתובת מייל אחרת.";
+                }
+                else if(error.Description.Contains("digit"))
+                {
+                    error.Description = "הסיסמא חייבת להכיל לפחות ספרה אחת.";
+                }
+                else if(error.Description.Contains("uppercase"))
+                {
+                    error.Description = "הסיסמא חייבת להכיל לפחות אות אחת גדולה.";
                 }
                    
                 ModelState.AddModelError(string.Empty, error.Description);
