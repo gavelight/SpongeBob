@@ -27,5 +27,9 @@ namespace FinalProject.Models
         public virtual Branch Bran { get; set; }
 
         public virtual Product Prod { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
+
+        public string ApplicationUserId { get; set; }
     }
 }

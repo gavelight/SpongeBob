@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace FinalProject.Controllers
 {
@@ -65,6 +67,9 @@ namespace FinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userName = User.Identity.Name;
+                var applicationUserId = _context.Users.Where(u => u.UserName == userName).First().Id;
+                sale.ApplicationUserId = applicationUserId;
                 _context.Add(sale);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
