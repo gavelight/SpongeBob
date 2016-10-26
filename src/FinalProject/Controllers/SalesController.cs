@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
+using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
@@ -18,7 +19,7 @@ namespace FinalProject.Controllers
 
         public SalesController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Sales
@@ -181,6 +182,61 @@ namespace FinalProject.Controllers
         private bool SaleExists(int id)
         {
             return _context.Sale.Any(e => e.ID == id);
+        }
+
+        public IActionResult Graphs()
+        {
+            return View();
+        }
+
+        // GET: Sales/GetBarGraphData
+        public ActionResult GetBarGraphData()
+        {
+            var products = from p in _context.Product select p;
+            var arrProducts = products.ToList();
+
+            var sales = from s in _context.Sale select s;
+            var arrSales = sales.ToList();
+
+            var barData = new List<Object>();
+            for (int i = 0; i < arrProducts.Count; i++)
+            {
+                var arrSalesPerProduct = arrSales.Where(s => s.ProductID.Equals(arrProducts[i].ID)).ToList();
+                int currentProductSales = 0;
+                for (int j = 0; j < arrSalesPerProduct.Count; j++)
+                {
+                    currentProductSales += arrSalesPerProduct[j].Amount;
+                }
+                var tempBranch = new { Product = arrProducts[i].Name, Count = currentProductSales };
+                barData.Add(tempBranch);
+            }
+
+            return Json(barData);
+        }
+
+        // GET: Sales/GetPieGraphData
+        public ActionResult GetPieGraphData()
+        {
+            var branches = from b in _context.Branch select b;
+            var arrBranches = branches.ToList();
+
+            var sales = from s in _context.Sale select s;
+            var arrSales = sales.ToList();
+
+            var pieData = new List<Object>();
+            for (int i = 0; i < arrBranches.Count; i++)
+            {
+                var arrSalesPerBranch = sales.Where(s => s.BranchID.Equals(arrBranches[i].ID)).ToList();
+                int currentBranchSales = 0;
+                for (int j = 0; j < arrSalesPerBranch.Count; j++)
+                {
+                    currentBranchSales += arrSalesPerBranch[j].Amount;
+                }
+                var tempBranch = new { label = arrBranches[i].Name, value = currentBranchSales };
+                pieData.Add(tempBranch);
+            }
+
+            return Json(pieData);
         }
     }
 }
