@@ -24,12 +24,18 @@ namespace FinalProject.Models
         [Required(ErrorMessage = "שדה כמות הינו שדה חובה")]
         public int Amount { get; set; }
 
+        public string ApplicationUserId { get; set; }
+
+        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "שדה תאריך הינו שדה חובה")]
+        [Display(Name = "תאריך")]
+        public DateTime Date { get; set; }
+
         public virtual Branch Bran { get; set; }
 
         public virtual Product Prod { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 
-        public string ApplicationUserId { get; set; }
     }
 }

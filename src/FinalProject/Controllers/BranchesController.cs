@@ -20,9 +20,32 @@ namespace FinalProject.Controllers
         }
 
         // GET: Branches
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string City, string IsKosher, string IsEventsAllowed, string IsDisabledAccess)
         {
-            return View(await _context.Branch.ToListAsync());
+            var Braches = from b in _context.Branch
+                          select b;
+
+            if (!String.IsNullOrEmpty(City))
+            {
+                Braches = Braches.Where(b => b.City.Contains(City));
+            }
+
+            if (!String.IsNullOrEmpty(IsKosher))
+            {
+                Braches = Braches.Where(b => b.IsKosher.Equals(true));
+            }
+
+            if (!String.IsNullOrEmpty(IsEventsAllowed))
+            {
+                Braches = Braches.Where(b => b.IsEventsAllowed.Equals(true));
+            }
+
+            if (!String.IsNullOrEmpty(IsDisabledAccess))
+            {
+                Braches = Braches.Where(b => b.IsDisabledAccess.Equals(true));
+            }
+
+            return View(await Braches.ToListAsync());
         }
 
         // GET: Branches/Details/5

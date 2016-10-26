@@ -24,8 +24,17 @@ namespace FinalProject.Controllers
         // GET: Sales
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Sale.Include(s => s.Bran).Include(s => s.Prod);
-            return View(await applicationDbContext.ToListAsync());
+            var Sales = _context.Sale.Include(s => s.Bran).Include(s => s.Prod);
+
+            if (!User.IsInRole("admin"))
+            {
+                var applicationUserId = _context.Users.Where(u => u.UserName == User.Identity.Name).First().Id;
+                var FilterSale = Sales.Where(s => s.ApplicationUserId.Equals(applicationUserId));
+
+                return View(await FilterSale.ToListAsync());
+            }
+
+            return View(await Sales.ToListAsync());
         }
 
         // GET: Sales/Details/5
@@ -45,6 +54,7 @@ namespace FinalProject.Controllers
             {
                 sale.Bran = await _context.Branch.SingleOrDefaultAsync(m => m.ID == sale.BranchID);
                 sale.Prod = await _context.Product.SingleOrDefaultAsync(m => m.ID == sale.ProductID);
+                sale.User = await _context.Users.SingleOrDefaultAsync(m => m.Id == sale.ApplicationUserId);
             }
 
             return View(sale);
@@ -63,7 +73,7 @@ namespace FinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Amount,BranchID,ProductID")] Sale sale)
+        public async Task<IActionResult> Create([Bind("ID,Amount,BranchID,ProductID,Date")] Sale sale)
         {
             if (ModelState.IsValid)
             {
@@ -92,6 +102,7 @@ namespace FinalProject.Controllers
             {
                 return NotFound();
             }
+            sale.User = await _context.Users.SingleOrDefaultAsync(m => m.Id == sale.ApplicationUserId);
             ViewData["BranchID"] = new SelectList(_context.Branch, "ID", "City", sale.BranchID);
             ViewData["ProductID"] = new SelectList(_context.Product, "ID", "Description", sale.ProductID);
             return View(sale);
@@ -102,7 +113,7 @@ namespace FinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Amount,BranchID,ProductID")] Sale sale)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Amount,BranchID,ProductID,,Date,ApplicationUserId")] Sale sale)
         {
             if (id != sale.ID)
             {
@@ -146,7 +157,7 @@ namespace FinalProject.Controllers
             if (sale == null)
             {
                 return NotFound();
-            }
+            } 
             else
             {
                 sale.Bran = await _context.Branch.SingleOrDefaultAsync(m => m.ID == sale.BranchID);

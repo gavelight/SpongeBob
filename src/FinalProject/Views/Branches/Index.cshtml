@@ -12,6 +12,37 @@
     <p>
         <a asp-action="Map">צפייה בסניפים על גבי מפה</a>
     </p>
+
+    <form asp-controller="Branches" asp-action="Index">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        עיר:
+                        <input type="text" name="City">
+                    </th>
+                    <th>
+                        האם כשר?:
+                        <input type="checkbox" name="IsKosher">
+                    </th>
+
+                    <th>
+                        אפשר לעשות אירועים?:
+                        <input type="checkbox" name="IsEventsAllowed">
+                    </th>
+                    <th>
+                        האם נגיש לנכים?:
+                        <input type="checkbox" name="IsDisabledAccess">
+                    </th>
+                    <th>
+                        <input type="submit" value="חפש" />
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </form>
+
+
     <table class="table">
         <thead>
             <tr>
