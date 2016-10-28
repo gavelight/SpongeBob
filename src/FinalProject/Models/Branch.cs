@@ -20,6 +20,10 @@ namespace FinalProject.Models
         [Required(ErrorMessage = "שדה עיר הינו שדה חובה")]
         public string City { get; set; }
 
+        [Display(Name = "כתובת")]
+        [Required(ErrorMessage = "שדה כתובת הינו שדה חובה")]
+        public string Address { get; set; }
+
         [Display(Name = "מספר טלפון")]
         [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = "שדה מספר טלפון הינו שדה חובה")]

@@ -76,7 +76,7 @@ namespace FinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,City,PhoneNumber,FoundationDate,IsDisabledAccess,IsEventsAllowed,IsKosher,Name,Region")] Branch branch)
+        public async Task<IActionResult> Create([Bind("ID,City,PhoneNumber,FoundationDate,IsDisabledAccess,IsEventsAllowed,IsKosher,Name,Region,Address")] Branch branch)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +108,7 @@ namespace FinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,City,PhoneNumber,FoundationDate,IsDisabledAccess,IsEventsAllowed,IsKosher,Name,Region")] Branch branch)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,City,PhoneNumber,FoundationDate,IsDisabledAccess,IsEventsAllowed,IsKosher,Name,Region,Address")] Branch branch)
         {
             if (id != branch.ID)
             {
@@ -173,7 +173,9 @@ namespace FinalProject.Controllers
 
         public IActionResult Map()
         {
-            return View();
+            var Branches = from b in _context.Branch select b;
+
+            return View(Branches);
         }
     }
 }
