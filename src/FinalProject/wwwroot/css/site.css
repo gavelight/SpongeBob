@@ -346,3 +346,23 @@ canvas{
     column-count: 2;
     margin-top: 10px;
 }
+
+/* Graphs */
+#barChart {
+    font-size: 14px;
+}
+
+.bar {
+    fill: steelblue;
+}
+
+    .bar:hover {
+        fill: #00b3fe;
+    }
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
