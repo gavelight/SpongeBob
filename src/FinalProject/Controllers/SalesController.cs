@@ -65,7 +65,7 @@ namespace FinalProject.Controllers
         public IActionResult Create()
         {
             ViewData["BranchID"] = new SelectList(_context.Branch, "ID", "City");
-            ViewData["ProductID"] = new SelectList(_context.Product, "ID", "Description");
+            ViewData["ProductID"] = new SelectList(_context.Product, "ID", "Name");
             return View();
         }
 
@@ -105,7 +105,7 @@ namespace FinalProject.Controllers
             }
             sale.User = await _context.Users.SingleOrDefaultAsync(m => m.Id == sale.ApplicationUserId);
             ViewData["BranchID"] = new SelectList(_context.Branch, "ID", "City", sale.BranchID);
-            ViewData["ProductID"] = new SelectList(_context.Product, "ID", "Description", sale.ProductID);
+            ViewData["ProductID"] = new SelectList(_context.Product, "ID", "Name", sale.ProductID);
             return View(sale);
         }
 
