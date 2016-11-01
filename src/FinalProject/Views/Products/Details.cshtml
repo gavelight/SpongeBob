@@ -42,7 +42,11 @@
         </dl>
     </div>
     <div>
-        <a asp-action="Edit" asp-route-id="@Model.ID">עריכת מוצר</a> |
+        @if(User.IsInRole("Admin"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.ID">עריכת מוצר</a> @:|
+        }
+        
         <a asp-action="Index">חזרה לרשימה</a>
     </div>
 </div>

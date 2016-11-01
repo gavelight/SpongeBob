@@ -6,9 +6,13 @@
 }
 
 <div class="container mtb">
-    <p>
-        <a asp-action="Create">יצירת סניף חדש</a>
-    </p>
+    @if (User.IsInRole("Admin"))
+    {
+        <p>
+            <a asp-action="Create">יצירת סניף חדש</a>
+        </p>
+    }
+
     <p>
         <a asp-action="Map">צפייה בסניפים על גבי מפה</a>
     </p>
@@ -108,9 +112,16 @@
                         @Html.DisplayFor(modelItem => item.IsEventsAllowed)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.ID">עריכה</a> |
-                        <a asp-action="Details" asp-route-id="@item.ID">פרטים</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID">מחיקה</a>
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Details" asp-route-id="@item.ID">פרטים</a>
+                        }
+                        else
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.ID">עריכה</a> @:|
+                            <a asp-action="Details" asp-route-id="@item.ID"> פרטים </a> @:|
+                            <a asp-action="Delete" asp-route-id="@item.ID"> מחיקה </a>
+                        }
                     </td>
                 </tr>
             }

@@ -6,12 +6,20 @@
 }
 
 <div class="container mtb">
-    <p>
-        <a asp-action="Graphs">צפייה בתצוגה גרפית</a>
-    </p>
-    <p>
-        <a asp-action="Create">צור רכישה חדשה</a>
-    </p>
+    @if (User.IsInRole("Admin"))
+    {
+        <p>
+            <a asp-action="Graphs">צפייה בתצוגה גרפית</a>
+        </p>
+    }
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            <a asp-action="Create">צור רכישה חדשה</a>
+        </p>
+    }
+
     <table class="table">
         <thead>
             <tr>
@@ -53,9 +61,16 @@
                         @Html.DisplayFor(modelItem => item.Date)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.ID">עריכה</a> |
-                        <a asp-action="Details" asp-route-id="@item.ID">פרטים</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID">מחיקה</a>
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Details" asp-route-id="@item.ID">פרטים</a>
+                        }
+                        else
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.ID">עריכה</a> @:|
+                            <a asp-action="Details" asp-route-id="@item.ID"> פרטים </a> @:|
+                            <a asp-action="Delete" asp-route-id="@item.ID"> מחיקה </a>
+                        }
                     </td>
                 </tr>
             }

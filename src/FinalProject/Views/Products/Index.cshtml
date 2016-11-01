@@ -6,9 +6,12 @@
 }
 
 <div class="container mtb">
-    <p>
-        <a asp-action="Create">הוספת מוצר חדש</a>
-    </p>
+    @if (User.IsInRole("Admin"))
+    {
+        <p>
+            <a asp-action="Create">הוספת מוצר חדש</a>
+        </p>
+    }
 
     <form asp-controller="Products" asp-action="Index">
         <table class="table">
@@ -81,9 +84,16 @@
                         @Html.DisplayFor(modelItem => item.IsVegan)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.ID">עריכה</a> |
-                        <a asp-action="Details" asp-route-id="@item.ID">פרטים</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID">מחיקה</a>
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Details" asp-route-id="@item.ID">פרטים</a>
+                        }
+                        else
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.ID">עריכה</a> @:|
+                            <a asp-action="Details" asp-route-id = "@item.ID"> פרטים </a> @:|
+                            <a asp-action="Delete" asp-route-id = "@item.ID"> מחיקה </a>
+                        }
                     </td>
                 </tr>
             }
