@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "סטטיסטיקה על סניפים";
+    ViewData["BlueTitle"] = "סטטיסטיקה על סניפים.";
+}
+
+<div class="container mtb">
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    אזור
+                </th>
+                <th>
+                    כמות
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in ViewBag.data)
+            {
+                <tr>
+                    <td>
+                        @item.Region
+                    </td>
+                    <td>
+                        @item.Count
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

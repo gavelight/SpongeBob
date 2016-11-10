@@ -177,5 +177,29 @@ namespace FinalProject.Controllers
 
             return View(Branches);
         }
+
+        public class RegionsViewModel
+        {
+            public string Region { get; set; }
+            public int Count { get; set; }
+        }
+
+        public IActionResult Stats()
+        {
+
+            var Branches = from b in _context.Branch
+                           group b by b.Region into r
+                           select new RegionsViewModel
+                           {
+                               Region = r.Key,
+                               Count = r.Count()
+                           };
+
+            ViewBag.data = Branches;
+
+            return View(Branches);
+        }
+
+        
     }
 }
