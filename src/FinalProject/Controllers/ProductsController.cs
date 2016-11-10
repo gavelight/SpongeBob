@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
+using System.Net.Http.Headers;
+using System.Net.Http;
 
 namespace FinalProject.Controllers
 {
@@ -32,7 +34,7 @@ namespace FinalProject.Controllers
 
             if (!String.IsNullOrEmpty(SearchKosher))
             {
-                //products = products.Where(s => s..Contains(SearchKosher));
+                products = products.Where(s => s.IsKosher.Equals(true));
             }
 
             if (!String.IsNullOrEmpty(SearchVegeterian))
@@ -43,6 +45,20 @@ namespace FinalProject.Controllers
             if (!String.IsNullOrEmpty(SearchVegan))
             {
                 products = products.Where(s => s.IsVegan.Equals(true));
+            }
+
+            // Use web service to get the current dollar rate
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://finance.yahoo.com");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var response = client.GetAsync("/d/quotes.csv?e=.csv&f=c4l1&s=ILSUSD=X").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    double dollarRate = Convert.ToDouble(response.Content.ReadAsStringAsync().Result.Split(new Char[] { ',', '\n' })[1]);
+                    ViewBag.dollarRate = dollarRate;
+                }
             }
 
             return View(await products.ToListAsync());
@@ -76,7 +92,7 @@ namespace FinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Description,IsVegan,IsVegeterian,Name,Price")] Product product)
+        public async Task<IActionResult> Create([Bind("ID,Description,IsVegan,IsVegeterian,Name,Price,IsKosher")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +124,7 @@ namespace FinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Description,IsVegan,IsVegeterian,Name,Price")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Description,IsVegan,IsVegeterian,Name,Price,IsKosher")] Product product)
         {
             if (id != product.ID)
             {

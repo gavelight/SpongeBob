@@ -29,6 +29,9 @@ namespace FinalProject.Models
         [Display(Name = "טבעוני?")]
         public bool IsVegan { get; set; }
 
+        [Display(Name = "כשר?")]
+        public bool IsKosher { get; set; }
+
         public virtual ICollection<Sale> Sales { get; set; }
 
     }

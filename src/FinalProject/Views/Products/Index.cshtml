@@ -25,7 +25,6 @@
                         האם כשר?:
                         <input type="checkbox" name="SearchKosher">
                     </th>
-
                     <th>
                         האם צמחוני?:
                         <input type="checkbox" name="SearchVegeterian">
@@ -51,15 +50,20 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
- 
                 <th>
                     @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    מחיר בדולרים  
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.IsVegeterian)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.IsVegan)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsKosher)
                 </th>
                 <th></th>
             </tr>
@@ -78,10 +82,16 @@
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td>
+                        @(item.Price * ViewBag.dollarRate)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.IsVegeterian)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.IsVegan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsKosher)
                     </td>
                     <td>
                         @if (!User.IsInRole("Admin"))
