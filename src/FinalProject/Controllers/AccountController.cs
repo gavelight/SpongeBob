@@ -462,6 +462,10 @@ namespace FinalProject.Controllers
                 {
                     error.Description = "הסיסמא חייבת להכיל לפחות אות אחת גדולה.";
                 }
+                else if(error.Description.Contains("lowercase"))
+                {
+                    error.Description = "הסיסמא חייבת להכיל לפחות אות אחת קטנה.";
+                }
                    
                 ModelState.AddModelError(string.Empty, error.Description);
             }
