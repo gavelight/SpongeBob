@@ -27,21 +27,25 @@ namespace FinalProject.Controllers
             var products = from m in _context.Product
                            select m;
 
+            // Filter by name
             if (!String.IsNullOrEmpty(SearchName))
             {
                 products = products.Where(s => s.Name.Contains(SearchName));
             }
 
+            // Filter by kosher
             if (!String.IsNullOrEmpty(SearchKosher))
             {
                 products = products.Where(s => s.IsKosher.Equals(true));
             }
 
+            // Filter by vegeterian
             if (!String.IsNullOrEmpty(SearchVegeterian))
             {
                 products = products.Where(s => s.IsVegeterian.Equals(true));
             }
 
+            // Filter by vegan
             if (!String.IsNullOrEmpty(SearchVegan))
             {
                 products = products.Where(s => s.IsVegan.Equals(true));

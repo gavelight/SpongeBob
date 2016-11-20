@@ -25,9 +25,10 @@ namespace FinalProject.Controllers
         // GET: Sales
         public async Task<IActionResult> Index()
         {
-            var Sales = _context.Sale.Include(s => s.Bran).Include(s => s.Prod);
+            var Sales = _context.Sale.Include(s => s.Bran).Include(s => s.Prod).Include(s => s.User);
 
-            if (!User.IsInRole("admin"))
+            // If the user is not admin, don't show the sales of the other users
+            if (!User.IsInRole("Admin"))
             {
                 var applicationUserId = _context.Users.Where(u => u.UserName == User.Identity.Name).First().Id;
                 var FilterSale = Sales.Where(s => s.ApplicationUserId.Equals(applicationUserId));
@@ -192,21 +193,30 @@ namespace FinalProject.Controllers
         // GET: Sales/GetBarGraphData
         public ActionResult GetBarGraphData()
         {
+            // Get all products
             var products = from p in _context.Product select p;
             var arrProducts = products.ToList();
 
+            // Get all sales
             var sales = from s in _context.Sale select s;
             var arrSales = sales.ToList();
 
             var barData = new List<Object>();
+
+            // Loop over all products
             for (int i = 0; i < arrProducts.Count; i++)
             {
+                // Get the sales of the current product
                 var arrSalesPerProduct = arrSales.Where(s => s.ProductID.Equals(arrProducts[i].ID)).ToList();
                 int currentProductSales = 0;
+
+                // Aggregate the sales for the current product
                 for (int j = 0; j < arrSalesPerProduct.Count; j++)
                 {
                     currentProductSales += arrSalesPerProduct[j].Amount;
                 }
+
+                // Prepare graph data
                 var tempBranch = new { Product = arrProducts[i].Name, Count = currentProductSales };
                 barData.Add(tempBranch);
             }
@@ -217,21 +227,30 @@ namespace FinalProject.Controllers
         // GET: Sales/GetPieGraphData
         public ActionResult GetPieGraphData()
         {
+            // Get all branches
             var branches = from b in _context.Branch select b;
             var arrBranches = branches.ToList();
 
+            // Get all sales
             var sales = from s in _context.Sale select s;
             var arrSales = sales.ToList();
 
             var pieData = new List<Object>();
+
+            // Loop over all branches
             for (int i = 0; i < arrBranches.Count; i++)
             {
+                // Get the sales of the current branch
                 var arrSalesPerBranch = sales.Where(s => s.BranchID.Equals(arrBranches[i].ID)).ToList();
                 int currentBranchSales = 0;
+
+                // Aggregate the sales for the current branch
                 for (int j = 0; j < arrSalesPerBranch.Count; j++)
                 {
                     currentBranchSales += arrSalesPerBranch[j].Amount;
                 }
+                
+                // Prepare graph data
                 var tempBranch = new { label = arrBranches[i].Name, value = currentBranchSales };
                 pieData.Add(tempBranch);
             }

@@ -25,21 +25,25 @@ namespace FinalProject.Controllers
             var Braches = from b in _context.Branch
                           select b;
 
+            // Filter by city
             if (!String.IsNullOrEmpty(City))
             {
                 Braches = Braches.Where(b => b.City.Contains(City));
             }
 
+            // Filter by kosher
             if (!String.IsNullOrEmpty(IsKosher))
             {
                 Braches = Braches.Where(b => b.IsKosher.Equals(true));
             }
 
+            // Filter by events allowed
             if (!String.IsNullOrEmpty(IsEventsAllowed))
             {
                 Braches = Braches.Where(b => b.IsEventsAllowed.Equals(true));
             }
 
+            // Filter by disabled access
             if (!String.IsNullOrEmpty(IsDisabledAccess))
             {
                 Braches = Braches.Where(b => b.IsDisabledAccess.Equals(true));
